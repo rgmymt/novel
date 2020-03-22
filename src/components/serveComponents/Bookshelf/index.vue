@@ -33,9 +33,16 @@ export default {
   /deep/.van-tabs__nav{
     background-color: #f7f8fa;
   }
+  /deep/.van-tabs--line .van-tabs__wrap {
+    height: 30px;
+  }
+  /deep/.van-tab {
+    line-height: 30px;
+  }
   /deep/.van-tabs__line{
     background-color:cornflowerblue;
-    height:1px;
+    height:4px;
+    width: 20px !important;
   }
   /deep/.van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after{
     border-width:0;

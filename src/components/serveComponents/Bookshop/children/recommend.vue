@@ -1,15 +1,15 @@
 <template>
   <div class="recommend">
-    <form action="/">
+    <!-- <form action="/">
       <van-search
         v-model="value"
         placeholder="请输入搜索关键词"
         @search="onSearch"
       />
-    </form>
+    </form> -->
     <div class="bookLine" v-for="(item,index) in bookList" :key=index @click="lookDetil">
       <div class="img">
-        <img src="../../../assets/2.jpg" style="width:100%;height:100%"/>
+        <img src="../../../../assets/2.jpg" style="width:100%;height:100%"/>
       </div>
       <div class="text">
         <div class="title">{{item.title}}</div>
@@ -31,7 +31,7 @@ export default {
       value:"",
       bookList:[
         {
-          imgUrl:"../../../assets/1.png",
+          imgUrl:"../../../../assets/1.png",
           title:"moumou",
           author:"木苏里",
           content:"欢迎来到实力至上主义的教室",

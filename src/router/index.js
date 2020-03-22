@@ -9,8 +9,14 @@ import bookContent from '@/components/commonComponents/book/bookContent'
 import Index from '@/components/index'
 import Login from '@/components/login/login'
 import Register from '@/components/login/register'
+import Manage from '@/components/manage/index'
 
-import Recommend from '@/components/serveComponents/Recommend/index'
+//管理端
+import newsManage from '@/components/manage/children/newsManage'
+//用户端
+import Bookshop from '@/components/serveComponents/Bookshop/index'
+
+import CreatPost from '@/components/serveComponents/Forum/creatPost'
 
 import Works from '@/components/serveComponents/Mine/children/works'
 import Edit from '@/components/serveComponents/Mine/children/edit'
@@ -27,7 +33,15 @@ export default new Router({
     {
       path: '/index',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: true //需要被缓存的组件
+      }
+    },
+    {
+      path: '/manage', // 管理员进入页面
+      name: 'Manage',
+      component: Manage
     },
     {
       path: '/login',
@@ -39,10 +53,17 @@ export default new Router({
       name: 'Register',
       component: Register
     },
+    // 管理端
     {
-      path: '/Recommend',
-      name: 'Recommend',
-      component: Recommend
+      path: '/newsManage',
+      name: 'newsManage',
+      component: newsManage
+    },
+    // 用户端
+    {
+      path: '/Bookshop',
+      name: 'Bookshop',
+      component: Bookshop
     },
     {
       path: '/bookDetil',
@@ -62,6 +83,11 @@ export default new Router({
     //     name: 'catalog',
     //     component: catalog
     // },
+    {
+      path: '/creatpost',
+      name: 'CreatPost',
+      component: CreatPost
+    },
     {
       path: '/bookContent',
       name: 'bookContent',

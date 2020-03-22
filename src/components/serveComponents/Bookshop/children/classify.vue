@@ -27,7 +27,7 @@ export default {
     return {
       bookList: [
         {
-          imgUrl: "../../../assets/logo.png",
+          imgUrl: "../../../../assets/logo.png",
           title: "moumou",
           author: "木苏里",
           content: "欢迎来到实力至上主义的教室",
@@ -45,7 +45,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
-        this.bookList = [];
+        this.list = [];
         this.refreshing = false;
       }
       // 异步更新数据

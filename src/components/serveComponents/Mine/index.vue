@@ -12,15 +12,20 @@
       <van-cell title="反馈" icon="my-fankui" is-link to="feedback" />
       <van-cell title="设置" icon="my-system" is-link to="set" />
     </div>
+    <div class="Box">
+      <van-button class="btn" type="info" block @click="loginOut">注销</van-button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data(){
     return{
       user:{
-        userName:' ',
+        userName:'',
+        passWord:''
       }
     }
   },
@@ -28,6 +33,15 @@ export default {
     this.user=this.$store.getters.user
     console.log(this.$store.getters)
   },
+  methods:{
+    ...mapActions(["setUserInfo"]),
+    loginOut(){
+      this.user.userName = ''
+      this.user.passWord = ''
+      this.setUserInfo(this.user);
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
@@ -42,6 +56,10 @@ export default {
   }
   .Box{
     margin-top: 1rem;
+    .btn{
+      margin: 0 auto;
+      width: 90%;
+    }
   }
 
 }
