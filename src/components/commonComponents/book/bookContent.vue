@@ -1,19 +1,19 @@
 <template>
   <div class="bookcontent">
-    书本内容
+    {{info.content}}
     <div class="moreInfo">
       <van-popup
         v-model="show"
         position="top"
         :overlay="false"
-        :style="{ height: '6%' }"
+        :style="{ height: '4%' }"
       >
       <van-row>
         <van-col span="4">
           <van-icon name="arrow-left" color="#7d7e80" size="2rem" @click="$router.go(-1)"/>
         </van-col>
         <van-col span="16" >
-          <div class="van-ellipsis">{{"1.bohe11111111111111111111111111111111111111111111"}}</div>
+          <div class="van-ellipsis">{{info.chaptername}}</div>
         </van-col>
       </van-row>
       </van-popup>
@@ -21,7 +21,7 @@
         v-model="show"
         position="bottom"
         :overlay="false"
-        :style="{ height: '10%' }"
+        :style="{ height: '6%' }"
       >
       <van-tabbar active-color="#7d7e80">
         <van-tabbar-item icon="bars" @click="showCatalog">目录</van-tabbar-item>
@@ -49,9 +49,15 @@ export default {
   },
   data(){
     return{
+      info:{},
       show:false,
       catalog:false,
     }
+  },
+  created(){
+    this.info = this.$route.query.info
+    console.log(this.info)
+    this.getCatalogDetail()
   },
   mounted () {
     window.addEventListener('click',this.closePopup)
@@ -68,6 +74,17 @@ export default {
     }
   },
   methods:{
+    getCatalogDetail(){
+      this.$request({
+        url: `${process.env.VUE_APP_API}/chapter/getContent`,
+        method: "get",
+        params:{
+          chapterId:this.info.chapterid
+        }
+      }).then(res => {
+        //this.chapterList = res 
+      })
+    },
     closePopup(){
       if(this.catalog!=true){
         this.show=!this.show
@@ -89,6 +106,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .bookcontent{
+  padding: 1rem;
   .moreInfo{
     /deep/.van-popup{
     background-color: #000;
@@ -99,7 +117,7 @@ export default {
       }
       /deep/.van-tabbar{
         background: none;
-        height: 10%;
+        //height: 10%;
       }
     }
   }

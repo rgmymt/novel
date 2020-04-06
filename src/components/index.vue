@@ -1,9 +1,9 @@
 <template>
   <div class="index">
     <van-nav-bar title="云小说阅读器">
-      <template #right>
+      <!-- <template #right>
         <van-icon name="search" />
-      </template>
+      </template> -->
     </van-nav-bar>
     <div class="tabContent" v-if="active == 0">
       <keep-alive>

@@ -1,22 +1,22 @@
 <template>
   <div class="bookshelf">
-    <van-tabs v-model="active" sticky animated>
-      <van-tab title="收藏">
+    <!-- <van-tabs v-model="active" sticky animated>
+      <van-tab title="收藏"> -->
         <Collect></Collect>
-      </van-tab>
+      <!-- </van-tab>
       <van-tab title="已阅">
         <Read></Read>
       </van-tab>
-    </van-tabs>
+    </van-tabs> -->
   </div>
 </template>
 
 <script>
-import Read from './read'
+//import Read from './read'
 import Collect from './collect'
 export default {
   components:{
-    Read,
+    //Read,
     Collect
   },
   data(){

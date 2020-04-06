@@ -2,13 +2,13 @@
   <div class="news">
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="newsLine" v-for="(item,index) in newsList" :key="index">
+        <div class="newsLine" v-for="(item,index) in newsList" :key="index" @click="lookNews(item)">
           <div class="head">
             <span class="title">{{item.newstitle}}</span>
           </div>
           <div class="bottom">
             <div class="author">{{item.writer}}</div>
-            <div class="time">{{item.createtime}}</div>
+            <div class="time">{{util.formatDateTime(item.createtime)}}</div>
           </div>
         </div>
       </van-list>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       newsList: [],
-      page: 1, // 当前页数
+      page: 0, // 当前页数
       size: 10, // 每页条数
       loading: false, // 是否显示加载中
       finished: false, // 是否到达尾端
@@ -34,6 +34,8 @@ export default {
       if (this.refreshing) {
         this.newsList = [];
         this.refreshing = false;
+      }else{
+        this.page = this.page + 1;
       }
       // 异步更新数据
       this.getnewsList();
@@ -45,12 +47,11 @@ export default {
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true;
-      this.page = this.page+1
       this.onLoad();
     },
     getnewsList() {
       this.$request({
-        url: "/api/news/pagesAll",
+        url: `${process.env.VUE_APP_API}/news/pagesAll`,
         method: "get",
         params: {
           page: this.page,
@@ -66,6 +67,17 @@ export default {
           this.finished = true;
         }
       });
+    },
+    lookNews(item){
+      this.$request({
+        url: `${process.env.VUE_APP_API}/news/getOne`,
+        method: "get",
+        params:{
+          newsId:item.newsid
+        }
+      }).then(res => {
+        this.$router.push({path:'/newsDetil',query:{info:res[0]}})
+      })
     }
   }
 };

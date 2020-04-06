@@ -7,7 +7,9 @@ export default new Vuex.Store({
     state:{
         user:{
             userName:'',
-            passWord:''
+            passWord:'',
+            iswriter:'',
+            userid:'',
         },
     },
     getters:{

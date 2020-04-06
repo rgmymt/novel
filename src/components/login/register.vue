@@ -30,11 +30,11 @@
         <van-radio name="1">作家</van-radio>
       </van-radio-group>-->
     </van-cell-group>
-    <van-checkbox v-model="checked" icon-size="15px" shape="square">
+    <!-- <van-checkbox v-model="checked" icon-size="15px" shape="square">
       同意
       <a class="pager" href>《协议》</a>
-    </van-checkbox>
-    <van-button plain type="info" @click="register" :disabled="disable">注册</van-button>
+    </van-checkbox> -->
+    <van-button plain type="info" @click="register" :disabled="this.passWord1!=this.passWord2||this.user.userName==''||this.passWord1==''">注册</van-button>
   </div>
 </template>
 
@@ -47,7 +47,7 @@ export default {
         passWord: ""
       },
       //isWriter: '0', // 是否为作家
-      checked: false,
+      checked: true,
       disable: true,
       passWord1: "",
       passWord2: "",
@@ -55,21 +55,6 @@ export default {
       password1Error: "",
       password2Error: ""
     };
-  },
-  watch: {
-    checked(val) {
-      if (val == true) {
-        if (
-          this.passWord1 == this.passWord2 &&
-          this.user.userName != "" &&
-          this.passWord1 != ""
-        ) {
-          this.disable = false;
-        } else {
-          this.disable = true;
-        }
-      }
-    }
   },
   methods: {
     register() {
@@ -83,7 +68,7 @@ export default {
         formData.append("username", this.user["userName"]);
         formData.append("password", this.user["passWord"]);
         this.$request({
-          url: "/api/register",
+          url: `${process.env.VUE_APP_API}/register`,
           method: "post",
           data: formData
         }).then(res => {

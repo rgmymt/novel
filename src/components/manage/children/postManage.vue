@@ -1,8 +1,16 @@
 <template>
-  <div class="feedback">
+  <div class="postManage">
+    <van-nav-bar title="帖子" left-arrow @click-left="$router.go(-1)" />
+    <van-tabs v-model="active" @change="Tabchange" sticky animated>
+      <van-tab name="first" title="交流分享">
+      </van-tab>
+      <van-tab name="second" title="问题反馈">
+      </van-tab>
+    </van-tabs>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="postLine" v-for="(item,index) in postList" :key="index" @click="lookPost(item)">
+        <van-swipe-cell v-for="(item,index) in postList" :key="index">
+          <div class="postLine" @click="lookPost(item)">
           <div class="head">
             <span class="title">{{item.posttitle}}</span>
           </div>
@@ -11,6 +19,10 @@
             <div class="time">{{util.formatDateTime(item.createtime)}}</div>
           </div>
         </div>
+          <template #right>
+            <van-button square type="danger" class="delete-button" text="删除" @click="deletePost(item)"/>
+          </template>
+        </van-swipe-cell>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -20,23 +32,29 @@
 export default {
   data() {
     return {
+      active:0,
+      TabType:'交流分享',
       postList: [],
       page: 0, // 当前页数
       size: 10, // 每页条数
       loading: false, // 是否显示加载中
       finished: false, // 是否到达尾端
-      refreshing: false, // 是否刷新
-      visible: false // 是否显示筛选
+      refreshing: false // 是否刷新
     };
   },
-  created() {},
   methods: {
+    // Tab切换
+    Tabchange(name,title){
+      this.TabType = title
+      this.postList=[]
+      this.getpostList()
+    },
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
         this.postList = [];
         this.refreshing = false;
-      }else{
+      } else {
         this.page = this.page + 1;
       }
       // 异步更新数据
@@ -51,10 +69,6 @@ export default {
       this.loading = true;
       this.onLoad();
     },
-    // 点击发表新帖
-    addPost() {
-      this.$router.push("/creatPost");
-    },
     getpostList() {
       this.$request({
         url: `${process.env.VUE_APP_API}/post/pagesApart`,
@@ -62,7 +76,7 @@ export default {
         params: {
           page: this.page,
           size: this.size,
-          postType: "问题反馈"
+          postType: this.TabType
         }
       }).then(res => {
         console.log(res);
@@ -73,6 +87,21 @@ export default {
         if (this.postList.length >= res.total) {
           this.finished = true;
         }
+      });
+    },
+    deletePost(item) {
+      console.log(item)
+      const formData = new FormData();
+      formData.append("postId", item.postid);
+      this.$request({
+        url: `${process.env.VUE_APP_API}/post/delete`,
+        method: "delete",
+        data: formData
+      }).then(res => {
+        console.log(res)
+        this.$toast.success('删除成功');
+        this.postList = []
+        this.getpostList()
       });
     },
     lookPost(item){
@@ -92,27 +121,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-.feedback {
-  .popclass {
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    z-index: 99;
-    right: 5px;
-    color: #ffffff;
-    width: 20%;
-    border-radius: 5px;
-    .classcell {
-      width: 85%;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 14px;
-      line-height: 25px;
-      border-bottom: 0.5px #ffffff solid;
-    }
-    .classcell:nth-last-child(1) {
-      border-bottom: 0;
-    }
-  }
+.postManage {
   .postLine {
     background: #ffffff;
     padding: 0 0.3rem;
@@ -135,6 +144,9 @@ export default {
         margin-left: 1rem;
       }
     }
+  }
+  .delete-button {
+    height: 100%;
   }
 }
 </style>

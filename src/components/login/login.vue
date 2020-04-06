@@ -37,6 +37,7 @@ export default {
     };
   },
   created() {
+    console.log(process.env.VUE_APP_API)
     this.getconnent();
   },
   methods: {
@@ -44,26 +45,41 @@ export default {
     login() {
       if (this.user.userName != "" && this.user.passWord != "") {
         const formData = new FormData();
-        formData.append('username', this.user['userName']);
-        formData.append('password', this.user['passWord']);
+        formData.append("username", this.user["userName"]);
+        formData.append("password", this.user["passWord"]);
         this.$request({
-          url: "/api/login",
+          url: `${process.env.VUE_APP_API}/login`,
           method: "post",
           data: formData
         }).then(res => {
-          if(this.user.userName === 'admin'){
-            this.$router.push({ path: "/manage" });
-          }else{
-            this.$router.push({ path: "/index" });
+          if (res.type === "success") {
+            this.getUserInfo();
+            console.log(res);
+          } else {
+            this.$toast.fail(res.msg);
           }
-          this.setUserInfo(this.user);
-          console.log(res);
         });
       } else if (this.user.userName == "") {
         this.userNameError = "用户名不能为空";
       } else {
         this.passWordError = "密码不能为空";
       }
+    },
+    getUserInfo() {
+      this.$request({
+        url: `${process.env.VUE_APP_API}/userInfo`,
+        method: "get"
+      }).then(res => {
+        console.log(res);
+        this.user.iswriter = res.iswriter;
+        this.user.userid = res.userid;
+        this.setUserInfo(this.user);
+        if (this.user.userName === "admin") {
+          this.$router.push({ path: "/manage" });
+        } else {
+          this.$router.push({ path: "/index" });
+        }
+      });
     },
     toRegister() {
       this.$router.push({ path: "/register" });
@@ -84,7 +100,7 @@ export default {
     },
     getconnent() {
       this.$request({
-        url: "/api/post/pagesApart",
+        url:  `${process.env.VUE_APP_API}/post/pagesApart`,
         method: "get",
         params: {
           postType: "问题反馈"

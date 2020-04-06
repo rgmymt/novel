@@ -1,25 +1,23 @@
 <template>
-  <div class="collect">
-    <div class="editBar">
-      <div class="btn" @click="addActivity()">
-        <div>
-          <van-icon class="icon" name="flag-o" />
-        </div>
-        <div>发起活动</div>
-      </div>
-    </div>
+  <div class="activityManage">
+    <van-nav-bar title="活动" left-arrow @click-left="$router.go(-1)" />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="activityLine" v-for="(item,index) in activityList" :key="index" @click="lookActivity(item)">
-          <div class="head">
-            <span class="title">{{item.acttitle}}</span>
-            <span class="location">{{item.location}}</span>
+        <van-swipe-cell v-for="(item,index) in activityList" :key="index" @click="lookActivity(item)">
+          <div class="activityLine">
+            <div class="head">
+              <span class="title">{{item.acttitle}}</span>
+              <span class="location">{{item.location}}</span>
+            </div>
+            <div class="bottom">
+              <div class="organizer">{{item.organizer}}</div>
+              <div class="time">{{util.formatDateTime(item.createtime)}}</div>
+            </div>
           </div>
-          <div class="bottom">
-            <div class="organizer">{{item.organizer}}</div>
-            <div class="time">{{util.formatDateTime(item.createtime)}}</div>
-          </div>
-        </div>
+          <template #right>
+            <van-button square type="danger" class="delete-button" text="删除" @click="deleteActivity(item)"/>
+          </template>
+        </van-swipe-cell>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -58,9 +56,6 @@ export default {
       this.loading = true;
       this.onLoad();
     },
-    addActivity(){
-      this.$router.push('/creatActivity')
-    },
     getactivityList() {
       this.$request({
         url: `${process.env.VUE_APP_API}/activity/pagesAll`,
@@ -80,6 +75,21 @@ export default {
         }
       });
     },
+    deleteActivity(item) {
+      console.log(item)
+      const formData = new FormData();
+      formData.append("actId", item.actid);
+      this.$request({
+        url: `${process.env.VUE_APP_API}/activity/delete`,
+        method: "delete",
+        data: formData
+      }).then(res => {
+        console.log(res)
+        this.$toast.success('删除成功');
+        this.activityList = []
+        this.getactivityList()
+      });
+    },
     lookActivity(item){
       this.$request({
         url: `${process.env.VUE_APP_API}/activity/getOne`,
@@ -97,24 +107,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-.collect {
-  .editBar {
-    display: flex;
-    //justify-content: space-between;
-    justify-content: flex-end;
-    margin-top: 10px;
-    line-height: 20px;
-    font-size: 12px;
-    margin-right: 10px;
-    .btn {
-      display: flex;
-      .icon {
-        margin-top: 2px;
-        font-size: 16px;
-      }
-      margin-left: 10px;
-    }
-  }
+.activityManage {
   .activityLine {
     background: #ffffff;
     padding: 0 0.3rem;
@@ -142,6 +135,9 @@ export default {
         margin-left: 1rem;
       }
     }
+  }
+  .delete-button {
+    height: 100%;
   }
 }
 </style>

@@ -43,7 +43,7 @@ export default {
       formData.append("postContent", this.postContent);
       formData.append("postType", this.$route.query.postType);
       this.$request({
-        url: "/api/post/insert",
+        url: `${process.env.VUE_APP_API}/post/insert`,
         method: "post",
         data: formData
       }).then(res => {

@@ -4,6 +4,9 @@
       <van-tab title="推荐">
         <recommend></recommend>
       </van-tab>
+      <van-tab title="分类">
+        <classify></classify>
+      </van-tab>
       <van-tab title="新闻通知">
         <news></news>
       </van-tab>
@@ -18,11 +21,13 @@
 import news from "./children/news";
 import recommend from "./children/recommend";
 import activity from "./children/activity";
+import classify from "./children/classify";
 export default {
   components: {
     recommend,
     news,
-    activity
+    activity,
+    classify
   },
   data() {
     return {

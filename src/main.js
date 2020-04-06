@@ -8,7 +8,10 @@ import store from './store'
 // 公共封装请求
 import request from './axios'
 import './assets/iconfont/iconfont.css'
-
+import Util from './common/util'
+Vue.prototype.util = Util
+// import Mui from 'vue-awesome-mui'
+// Vue.use(Mui)
 Vue.use(Vant);
 Vue.config.productionTip = false
 Vue.prototype.$request = request

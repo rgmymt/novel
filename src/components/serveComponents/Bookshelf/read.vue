@@ -34,7 +34,7 @@ export default {
           tagname: "无限流"
         }
       ],
-      page: 1, // 当前页数
+      page: 0, // 当前页数
       size: 10, // 每页条数
       loading: false, // 是否显示加载中
       finished: false, // 是否到达尾端
@@ -47,6 +47,8 @@ export default {
       if (this.refreshing) {
         this.bookList = [];
         this.refreshing = false;
+      }else{
+        this.page = this.page + 1;
       }
       // 异步更新数据
       this.getCollectBook();
@@ -58,12 +60,11 @@ export default {
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true;
-      this.page = this.page+1
       this.onLoad();
     },
     getCollectBook() {
       this.$request({
-        url: "/api/measure/pagesAll",
+        url: `${process.env.VUE_APP_API}/measure/pagesAll`,
         method: "get",
         params: {
           page: this.page,

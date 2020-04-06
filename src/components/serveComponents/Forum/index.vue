@@ -63,7 +63,8 @@ export default {
     .btn {
       display: flex;
       .icon {
-        margin-top: 4px;
+        margin-top: 2px;
+        font-size: 16px;
       }
       margin-left: 10px;
     }

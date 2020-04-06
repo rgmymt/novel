@@ -2,13 +2,13 @@
   <div class="share">
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="postLine" v-for="(item,index) in postList" :key="index">
+        <div class="postLine" v-for="(item,index) in postList" :key="index" @click="lookPost(item)">
           <div class="head">
             <span class="title">{{item.posttitle}}</span>
           </div>
           <div class="bottom">
             <div class="author">{{item.writername}}</div>
-            <div class="time">{{item.createtime}}</div>
+            <div class="time">{{util.formatDateTime(item.createtime)}}</div>
           </div>
         </div>
       </van-list>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       postList: [],
-      page: 1, // 当前页数
+      page: 0, // 当前页数
       size: 10, // 每页条数
       loading: false, // 是否显示加载中
       finished: false, // 是否到达尾端
@@ -36,6 +36,8 @@ export default {
       if (this.refreshing) {
         this.postList = [];
         this.refreshing = false;
+      }else{
+        this.page = this.page + 1;
       }
       // 异步更新数据
       this.getpostList();
@@ -47,16 +49,11 @@ export default {
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true;
-      this.page = this.page+1
       this.onLoad();
-    },
-    // 点击发表新帖
-    addPost() {
-      this.$router.push("/creatPost");
     },
     getpostList() {
       this.$request({
-        url: "/api/post/pagesApart",
+        url: `${process.env.VUE_APP_API}/post/pagesApart`,
         method: "get",
         params: {
           page: this.page,
@@ -73,6 +70,17 @@ export default {
           this.finished = true;
         }
       });
+    },
+    lookPost(item){
+      this.$request({
+        url: `${process.env.VUE_APP_API}/post/getOne`,
+        method: "get",
+        params:{
+          postId:item.postid
+        }
+      }).then(res => {
+        this.$router.push({path:'/postDetil',query:{info:res}})
+      })
     }
   }
 };
