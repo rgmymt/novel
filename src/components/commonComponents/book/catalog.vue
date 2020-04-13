@@ -65,7 +65,12 @@ export default {
   },
   methods: {
     bookContent(item) {
-      this.$router.push({ path: "/bookContent" ,query:{info:item}});
+      console.log(this.$route.path)
+      if(this.$route.path ==='/bookContent'){
+        this.$emit('change',item)
+      }else{
+        this.$router.push({ path: "/bookContent" ,query:{info:item}});
+      }
     },
     getChapterList() {
       this.$request({

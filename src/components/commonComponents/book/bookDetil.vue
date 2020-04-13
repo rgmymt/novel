@@ -17,8 +17,8 @@
     </div>
     <div class="btnBox">
       <van-button plain type="info" @click="bookContent">开始阅读</van-button>
-      <van-button plain icon="star-o" type="warning" @click="collect">收藏</van-button>
-      <van-button plain icon="like-o" type="danger" @click="like">点赞</van-button>
+      <van-button v-if="user.userName!='admin'" plain icon="star-o" type="warning" @click="collect">收藏</van-button>
+      <van-button v-if="user.userName!='admin'" plain icon="like-o" type="danger" @click="like">点赞</van-button>
     </div>
     <keep-alive>
       <van-tabs v-model="active" sticky animated>
@@ -68,6 +68,7 @@ export default {
       active: 0,
       commentList:[],
       comment:'',
+      user:{},
       info: {
         imgUrl: "",
         novelname: "",
@@ -77,8 +78,12 @@ export default {
       }
     };
   },
+  created(){
+    
+  },
   activated() {
-    this.info = this.$route.query.info;
+    this.user = this.$store.state.user;
+    this.info = JSON.parse(this.$route.query.info);
     this.getCommentList()
   },
   methods: {
@@ -250,13 +255,13 @@ export default {
     }
   }
   .bottom {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }
   .btnBox {
     .van-button {
-      margin: 0 1rem;
+      margin-left: 1rem;
       margin-bottom: 0.5rem;
     }
   }

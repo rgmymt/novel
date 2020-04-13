@@ -1,10 +1,10 @@
 <template>
   <div class="activityManage">
-    <van-nav-bar title="活动" left-arrow @click-left="$router.go(-1)" />
+    <van-nav-bar title="活动" left-arrow @click-left="$router.push('/manage')" />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-swipe-cell v-for="(item,index) in activityList" :key="index" @click="lookActivity(item)">
-          <div class="activityLine">
+        <van-swipe-cell v-for="(item,index) in activityList" :key="index">
+          <div class="activityLine" @click="lookActivity(item)">
             <div class="head">
               <span class="title">{{item.acttitle}}</span>
               <span class="location">{{item.location}}</span>

@@ -6,7 +6,7 @@
         v-model="show"
         position="top"
         :overlay="false"
-        :style="{ height: '4%' }"
+        :style="{ height: '5%' }"
       >
       <van-row>
         <van-col span="4">
@@ -21,7 +21,7 @@
         v-model="show"
         position="bottom"
         :overlay="false"
-        :style="{ height: '6%' }"
+        :style="{ height: '7%' }"
       >
       <van-tabbar active-color="#7d7e80">
         <van-tabbar-item icon="bars" @click="showCatalog">目录</van-tabbar-item>
@@ -32,7 +32,7 @@
     </div>
     <div class="catalogBox">
       <van-popup position="right" v-model="catalog" closeable :style="{ width: '100%' ,height:'100%'}">
-        <Catalog></Catalog>
+        <Catalog @change="change"></Catalog>
       </van-popup>
     </div>
   </div>
@@ -85,6 +85,10 @@ export default {
         //this.chapterList = res 
       })
     },
+    change(info){
+      this.info = info
+      this.catalog=false;
+    },
     closePopup(){
       if(this.catalog!=true){
         this.show=!this.show
@@ -94,10 +98,10 @@ export default {
       this.catalog=true;
     },
     toBookDetil(){
-      this.$router.push({path:'/bookDetil'})
+      this.$router.go(-1)
     },
     toHome(){
-      this.$router.push({path:'/'})
+      this.$router.push({path:'/index'})
     }
   },
 }
@@ -117,7 +121,7 @@ export default {
       }
       /deep/.van-tabbar{
         background: none;
-        //height: 10%;
+        height: 7%;
       }
     }
   }

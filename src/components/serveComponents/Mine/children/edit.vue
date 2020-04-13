@@ -72,7 +72,7 @@
         <van-col span="12" offset="4">标题</van-col>
         <van-icon name="add-o" @click="addCatalog(-1)" />
       </van-row>
-      <van-row v-for="(item ,index) in chapterList" :key="index" @click="bookContent">
+      <van-row v-for="(item ,index) in chapterList" :key="index">
         <van-col span="4">{{index+1}}</van-col>
         <van-col span="16" offset="4">{{item.chaptername}}</van-col>
         <!-- <van-col span="2">
@@ -232,13 +232,14 @@ export default {
         this.chapterList = res;
       });
     },
-    // addCatalog(index) {
-    //   this.show = true;
-    //   console.log(index)
-    // },
+    addCatalog(index) {
+      this.show = true;
+      console.log(index)
+    },
     // delCatalog(index) {
     //   console.log("删除章节", index);
     // },
+    
     saveCatalog() {
       this.show = false;
       const formData = new FormData();
@@ -253,6 +254,7 @@ export default {
         console.log(res);
         if (res.type === "success") {
           this.$toast.success("章节添加成功");
+          this.getCatalogList()
         } else {
           this.$toast.fail(res.msg);
         }

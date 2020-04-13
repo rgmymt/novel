@@ -120,7 +120,7 @@ export default {
         }
       }).then(res => {
         console.log(res);
-        this.$router.push({path:'/bookDetil',query:{info:res}})
+        this.$router.push({path:'/bookDetil',query:{info:JSON.stringify(res)}})
       })
     }
   }

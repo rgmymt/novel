@@ -1,6 +1,6 @@
 <template>
   <div class="postManage">
-    <van-nav-bar title="帖子" left-arrow @click-left="$router.go(-1)" />
+    <van-nav-bar title="帖子" left-arrow @click-left="$router.push('/manage')" />
     <van-tabs v-model="active" @change="Tabchange" sticky animated>
       <van-tab name="first" title="交流分享">
       </van-tab>

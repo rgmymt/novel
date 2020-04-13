@@ -1,6 +1,6 @@
 <template>
   <div class="applyManage">
-    <van-nav-bar title="审核中心" left-arrow @click-left="$router.go(-1)" />
+    <van-nav-bar title="审核中心" left-arrow @click-left="$router.push('/manage')" />
         <van-swipe-cell v-for="(item,index) in applyList" :key="index">
           <div class="applyLine">
           <div class="head">

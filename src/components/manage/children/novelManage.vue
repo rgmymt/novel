@@ -1,13 +1,13 @@
 <template>
   <div class="novelManage">
-    <van-nav-bar title="小说管理" left-arrow @click-left="$router.go(-1)" />
+    <van-nav-bar title="小说管理" left-arrow @click-left="$router.push('/manage')" />
     <van-dropdown-menu>
       <van-dropdown-item v-model="tagName" :options="options" @change="tagChange" />
     </van-dropdown-menu>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-swipe-cell v-for="(item,index) in novelList" :key="index"  @click="lookDetail(item)">
-          <div class="novelLine">
+        <van-swipe-cell v-for="(item,index) in novelList" :key="index" >
+          <div class="novelLine"  @click="lookDetail(item)">
             <div class="head">
               <span class="title">{{item.novelname}}</span>
             </div>
@@ -139,7 +139,7 @@ export default {
         }
       }).then(res => {
         console.log(res);
-        this.$router.push({path:'/bookDetil',query:{info:res}})
+        this.$router.push({path:'/bookDetil',query:{info:JSON.stringify(res)}})
       })
     }
   }

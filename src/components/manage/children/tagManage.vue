@@ -3,7 +3,7 @@
     <van-nav-bar
       title="标签管理"
       left-arrow
-      @click-left="$router.go(-1)"
+      @click-left="$router.push('/manage')"
       right-text="新增"
       @click-right="Tagadd=true"
     />

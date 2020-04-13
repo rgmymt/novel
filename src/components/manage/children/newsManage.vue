@@ -4,7 +4,7 @@
       title="新闻通知"
       left-arrow
       right-text="新增"
-      @click-left="$router.go(-1)"
+      @click-left="$router.push('/manage')"
       @click-right="addNews = true"
     />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -125,7 +125,7 @@ export default {
       console.log(values);
       const formData = new FormData();
       formData.append("newsTitle", this.newsTitle);
-      formData.append("newsContent", this.postContent);
+      formData.append("newsContent", this.newsContent);
       formData.append("writer", '管理员');
       this.$request({
         url: `${process.env.VUE_APP_API}/news/insert`,
@@ -134,6 +134,7 @@ export default {
       }).then(res => {
           console.log(res)
         this.$toast.success('新增成功');
+        this.getnewsList()
         this.done = true
         this.addNews = false;
       })

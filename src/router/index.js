@@ -72,7 +72,10 @@ export default new Router({
     {
       path: '/novelManage',
       name: 'novelManage',
-      component: novelManage
+      component: novelManage,
+      meta: {
+        keepAlive: true //需要被缓存的组件
+      }
     },
     {
       path: '/activityManage',
@@ -82,7 +85,10 @@ export default new Router({
     {
       path: '/postManage',
       name: 'postManage',
-      component: postManage
+      component: postManage,
+      meta: {
+        keepAlive: true //需要被缓存的组件
+      }
     },
     {
       path: '/applyManage',

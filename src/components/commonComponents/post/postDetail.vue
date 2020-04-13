@@ -104,6 +104,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .activitydetil {
+  padding-bottom: 50px;
   .post_body {
     padding: 1rem;
     .head {
@@ -150,7 +151,7 @@ export default {
     }
   }
   .bottom {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }

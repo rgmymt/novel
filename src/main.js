@@ -10,8 +10,9 @@ import request from './axios'
 import './assets/iconfont/iconfont.css'
 import Util from './common/util'
 Vue.prototype.util = Util
-// import Mui from 'vue-awesome-mui'
-// Vue.use(Mui)
+import Mui from 'vue-awesome-mui'
+// // mount with global
+Vue.use(Mui)
 Vue.use(Vant);
 Vue.config.productionTip = false
 Vue.prototype.$request = request

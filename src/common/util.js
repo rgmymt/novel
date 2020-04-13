@@ -18,7 +18,7 @@
 
     function formatDateTime(date) {
         var time = new Date(Date.parse(date));
-        time.setTime(time.setHours(time.getHours() + 8));
+        time.setTime(time.setHours(time.getHours()));
         var Y = time.getFullYear() + '-';
         var M = this.addZero(time.getMonth() + 1) + '-';
         var D = this.addZero(time.getDate()) + ' ';
