@@ -32,6 +32,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.newsList = [];
         this.refreshing = false;
       }else{
@@ -90,6 +91,7 @@ export default {
     background: #ffffff;
     padding: 0 0.3rem;
     margin: 0.3rem 0;
+    border-bottom: 1px #dddddd dashed;
     .head {
       padding: 0.3rem 0;
       .title {

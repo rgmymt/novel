@@ -18,7 +18,7 @@
         @blur="password"
       />
     </van-cell-group>
-    <van-button plain type="primary" @click="login">登录</van-button>
+    <van-button  type="info" @click="login">登录</van-button>
     <van-button plain type="info" @click="toRegister">注册</van-button>
   </div>
 </template>
@@ -125,7 +125,7 @@ export default {
   flex-direction: column;
   align-items: center;
   .logo {
-    margin-top: 30%;
+    margin-top: 15%;
     width: 50%;
   }
   .van-cell-group {
@@ -144,6 +144,15 @@ export default {
   .van-button {
     width: 70%;
     margin: 2vh 0;
+  }
+  .van-button--info{
+    background-color: #5a62a1;
+    border:1px solid #5a62a1;
+  }
+  .van-button--plain.van-button--info{
+    background: none;
+    color:#5a62a1;
+    border:1px solid #5a62a1;
   }
 }
 </style>

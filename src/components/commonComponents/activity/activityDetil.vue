@@ -36,6 +36,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .activitydetil {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
   .body{
     padding: 1rem;
     .title{

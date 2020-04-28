@@ -43,7 +43,7 @@
           </div>
         </van-tab>
         <van-tab title="目录">
-          <Catalog></Catalog>
+          <Catalog :chapter="chapterList"></Catalog>
         </van-tab>
       </van-tabs>
     </keep-alive>
@@ -69,6 +69,7 @@ export default {
       commentList:[],
       comment:'',
       user:{},
+      chapterList:[],
       info: {
         imgUrl: "",
         novelname: "",
@@ -79,17 +80,14 @@ export default {
     };
   },
   created(){
-    
   },
   activated() {
     this.user = this.$store.state.user;
     this.info = JSON.parse(this.$route.query.info);
     this.getCommentList()
+    this.getChapterList()
   },
   methods: {
-    authorDetil() {
-      this.$router.push({ path: "/authorDetil" });
-    },
     bookContent() {
       this.$request({
         url: `${process.env.VUE_APP_API}/chapter/getAll`,
@@ -178,6 +176,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .bookdetil {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
   .bookLine {
     padding: 0.7rem;
     display: flex;
@@ -211,6 +219,7 @@ export default {
   }
   .comment_body {
     padding: 1rem;
+    border-bottom: 1px dashed #ddd;
     .head {
       display: flex;
       align-items: center;
@@ -258,6 +267,13 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100%;
+    .van-button--info{
+      background-color: #5a62a1;
+      border:1px solid #5a62a1;
+    }
+  .van-cell{
+    box-shadow: 0px -3px 10px #ddd;;
+  }
   }
   .btnBox {
     .van-button {
@@ -266,7 +282,7 @@ export default {
     }
   }
   /deep/.van-tabs__nav {
-    background-color: #f2f4f9;
+    background-color: #fff;
   }
   /deep/.van-tabs__line {
     background-color: cornflowerblue;

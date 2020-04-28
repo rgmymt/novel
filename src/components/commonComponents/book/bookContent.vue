@@ -10,7 +10,7 @@
       >
       <van-row>
         <van-col span="4">
-          <van-icon name="arrow-left" color="#7d7e80" size="2rem" @click="$router.go(-1)"/>
+          <van-icon name="arrow-left" color="#333" size="2rem" @click="$router.go(-1)"/>
         </van-col>
         <van-col span="16" >
           <div class="van-ellipsis">{{info.chaptername}}</div>
@@ -24,10 +24,16 @@
         :style="{ height: '7%' }"
       >
       <van-tabbar active-color="#7d7e80">
+        <van-tabbar-item  @click="setFont = true"><img src="../../../assets/fontSize.png" style="width:18px"><br/>字体</van-tabbar-item>
         <van-tabbar-item icon="bars" @click="showCatalog">目录</van-tabbar-item>
         <van-tabbar-item icon="description" @click="toBookDetil">文章详情</van-tabbar-item>
         <van-tabbar-item icon="home-o" @click="toHome">首页</van-tabbar-item>
       </van-tabbar>
+      </van-popup>
+      <van-popup v-model="setFont" position="bottom" :overlay="false" :style="{ height: '14%' }" style="padding:10px 10px;box-sizing:border-box;font-size:17px">
+        <div style="text-align:right"><van-icon name="cross" @click="setFont=false"/></div>
+        <van-slider v-model="fontSize" :step="1" :min="12" :max="25" @change="fontSizeChange" />
+        <div style="margin-top:20px;text-align:center">字体调整</div>
       </van-popup>
     </div>
     <div class="catalogBox">
@@ -51,7 +57,9 @@ export default {
     return{
       info:{},
       show:false,
+      setFont:false,
       catalog:false,
+      fontSize:17
     }
   },
   created(){
@@ -89,6 +97,10 @@ export default {
       this.info = info
       this.catalog=false;
     },
+    fontSizeChange(val){
+      let content = document.getElementsByClassName('bookcontent')[0]
+      content.style.fontSize = val+'px'
+    },
     closePopup(){
       if(this.catalog!=true){
         this.show=!this.show
@@ -111,9 +123,12 @@ export default {
 <style lang="less" scoped>
 .bookcontent{
   padding: 1rem;
+  height: 100vh;
+  background-color: rgba(215, 232, 212, 0.5);
+  font-size: 17px;
   .moreInfo{
     /deep/.van-popup{
-    background-color: #000;
+    background-color: rgba(150, 151, 153, 0.5);
     opacity: 0.8;
       .van-ellipsis{
         line-height: 2rem;

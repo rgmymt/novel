@@ -115,8 +115,13 @@ export default {
   align-items: center;
   .van-nav-bar {
     width: 100%;
+    background-color: #5a62a1;
+    
     .van-icon {
-      color: #333;
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
     }
   }
   .logo {
@@ -152,6 +157,11 @@ export default {
   .van-button {
     width: 70%;
     margin-top: 10vh;
+  }
+  .van-button--plain.van-button--info{
+    background: none;
+    color:#5a62a1;
+    border:1px solid #5a62a1;
   }
 }
 </style>

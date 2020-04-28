@@ -68,6 +68,20 @@ export default {
 <style lang="less" scoped>
 .creatPost {
   text-align: center;
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
+  .van-button--info{
+    background-color: #5a62a1;
+    border:1px solid #5a62a1;
+  }
   .textarea {
     height: 65vh;
   }

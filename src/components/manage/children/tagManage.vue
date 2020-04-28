@@ -86,6 +86,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .applyManage {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+    .van-nav-bar__text{
+      color: #fff;
+    }
+  }
   /deep/.van-field {
     padding: 0px;
   }

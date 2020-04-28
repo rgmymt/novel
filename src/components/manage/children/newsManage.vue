@@ -73,6 +73,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.newsList = [];
         this.refreshing = false;
       }else{
@@ -134,6 +135,7 @@ export default {
       }).then(res => {
           console.log(res)
         this.$toast.success('新增成功');
+        this.newsList = []
         this.getnewsList()
         this.done = true
         this.addNews = false;
@@ -157,10 +159,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .newsManage {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+    .van-nav-bar__text{
+      color: #fff;
+    }
+  }
   .newsLine {
     background: #ffffff;
     padding: 0 0.3rem;
     margin: 0.3rem 0;
+    border-bottom: 1px dashed #ddd;
     box-sizing: border-box;
     .head {
       padding: 0.3rem 0;

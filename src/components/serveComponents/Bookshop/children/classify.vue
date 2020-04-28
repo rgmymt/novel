@@ -1,13 +1,15 @@
 <template>
   <div class="classify">
     <div class="header">
-      <div>类别：</div>
+      <div class="label">类别：</div>
+      <div class="tagBox">
       <div
         class="tag"
         v-for="(item,index) in tag"
         :key="index"
         @click="tagClick(item,index)"
       >{{item.typename}}</div>
+      </div>
       <!-- <van-tag :id="item.typename" v-for="(item,index) in tag" :key="index" plain @click="tagClick(item,index)">{{item.typename}}</van-tag> -->
     </div>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -43,13 +45,14 @@ export default {
       refreshing: false // 是否刷新
     };
   },
-  mounted() {
+  activated() {
     this.gettagList();
   },
   methods: {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.bookList = [];
         this.refreshing = false;
       } else {
@@ -134,8 +137,20 @@ export default {
     display: flex;
     padding: 1rem;
     font-size: 0.6rem;
+    .label{
+      white-space: nowrap;
+    }
+    .tagBox{
+      display: flex;
+      flex-wrap: wrap;
+      .tag {
+        margin-left: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
+    }
     .tag {
       margin-left: 0.8rem;
+      margin-bottom: 0.5rem;
     }
   }
   .bookLine {
@@ -143,6 +158,7 @@ export default {
     display: flex;
     background: #FFFFFF;
     margin-bottom: 0.5rem;
+    border-bottom: 1px #dddddd dashed;
     .img {
       float: left;
       width: 5rem;

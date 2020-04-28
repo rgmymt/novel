@@ -119,5 +119,9 @@ export default {
     text-align: center;
     margin: 6rem;
   }
+  .van-button--info{
+    background-color: #5a62a1;
+    border:1px solid #5a62a1;
+  }
 }
 </style>

@@ -14,7 +14,7 @@
             <div class="bottom">
               <div class="author">{{'作者：'+item.writername}}</div>
               <div class="detail">
-                <div class="data">{{'收藏量：'+item.likedata}}</div>
+                <div class="data">{{'点赞量：'+item.likedata}}</div>
                 <div class="data">{{'阅读量：'+item.readdata}}</div>
               </div>
             </div>
@@ -49,7 +49,9 @@ export default {
       refreshing: false // 是否刷新
     };
   },
-  created() {
+  activated(){
+    this.options=[]
+    this.novelList = []
     this.gettagList();
   },
   methods: {
@@ -78,6 +80,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.novelList = [];
         this.refreshing = false;
       } else {
@@ -149,6 +152,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .novelManage {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
   /deep/.van-dropdown-menu__title {
     width: 95%;
   }
@@ -159,6 +172,7 @@ export default {
     background: #ffffff;
     padding: 0 1rem;
     margin: 0.3rem 0;
+    border-bottom: 1px dashed #ddd;
     .head {
       padding: 0.3rem 0;
       .title {

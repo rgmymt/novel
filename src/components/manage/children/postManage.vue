@@ -35,7 +35,7 @@ export default {
       active:0,
       TabType:'交流分享',
       postList: [],
-      page: 0, // 当前页数
+      page: 1, // 当前页数
       size: 10, // 每页条数
       loading: false, // 是否显示加载中
       finished: false, // 是否到达尾端
@@ -45,6 +45,7 @@ export default {
   methods: {
     // Tab切换
     Tabchange(name,title){
+      this.page = 1
       this.TabType = title
       this.postList=[]
       this.getpostList()
@@ -52,6 +53,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.postList = [];
         this.refreshing = false;
       } else {
@@ -122,10 +124,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .postManage {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+    .van-nav-bar__text{
+      color: #fff;
+    }
+  }
   .postLine {
     background: #ffffff;
     padding: 0 0.3rem;
     margin: 0.3rem 0;
+    border-bottom: 1px dashed #ddd;
     .head {
       padding: 0.3rem 0;
       .title {

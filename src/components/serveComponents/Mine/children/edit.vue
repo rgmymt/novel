@@ -4,7 +4,7 @@
     <van-cell-group>
       <van-field label="书名" name="name">
         <template #input>
-          <van-field v-model="bookName" placeholder="请输入书名" :readonly="isBook"/>
+          <van-field v-model="bookName" placeholder="请输入书名" :readonly="isBook==='true'"/>
         </template>
       </van-field>
     </van-cell-group>
@@ -29,7 +29,7 @@
       <van-cell class="cover" title="封面">
         <van-uploader v-model="fileList" :max-count="1" :after-read="afterRead" multiple/>
     </van-cell>-->
-    <div v-if="!isBook" style="text-align:center;margin:1rem">
+    <div v-if="isBook==='false'" style="text-align:center;margin:1rem">
     <van-button plain type="info" @click="addBook">加入书库</van-button>
     </div>
     <van-popup class="tagsel" v-model="tagchoose" position="bottom" :style="{ height: '100%' }">
@@ -61,7 +61,7 @@
         </van-cell>
       </div>
     </van-popup>
-    <div v-show="isBook" class="catalog">
+    <div v-show="isBook==='true'" class="catalog">
       <!-- <div class="title">
         <span style="float:left">章节</span>
         <van-icon name="add-o" style="float:right" />
@@ -113,7 +113,7 @@ export default {
       bookName: "",
       tag: [], // 已选标签列表
       tagList: [], // 所有标签列表
-      isBook: false, // 是否加入书库成功
+      isBook: 'false', // 是否加入书库成功
       chapterList: [],
       fileList: [],
       title:'章节名称',
@@ -126,7 +126,9 @@ export default {
   created() {
     this.gettagList();
     this.isBook = this.$route.query.isBook
-    if(this.isBook){
+    console.log(this.isBook)
+    if(this.isBook==='true'){
+      console.log(this.isBook)
       this.info = this.$route.query.info
       this.bookName = this.info.novelname
       this.tag.push(this.info)
@@ -184,7 +186,7 @@ export default {
     //   })
     // },
     tagselect(){
-      if(!this.isBook){
+      if(this.isBook==='false'){
         this.tagchoose = true
       }
     },
@@ -201,7 +203,8 @@ export default {
         console.log(res);
         if (res.type === "success") {
           this.$toast.success("加入书库成功");
-          this.isBook = true
+          //this.isBook = 'true'
+          this.$router.go(-1)
         } else {
           this.$toast.fail(res.msg);
         }
@@ -272,9 +275,19 @@ export default {
 <style lang="less" scoped>
 .works {
   .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
     .van-icon {
-      color: #333;
+      color: #fff;
     }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
+  .van-button--plain.van-button--info{
+    background: none;
+    color:#5a62a1;
+    border:1px solid #5a62a1;
   }
   /deep/.van-field__label {
     margin: auto;

@@ -2,7 +2,7 @@
   <div class="works">
     <van-nav-bar title="我的作品" left-arrow @click-left="$router.go(-1)">
       <div slot="right" @click="goNewnovel" class="right_shot">
-        <van-icon name="my-xiexin" color="#1989fa" style="line-height:12px;font-size:12px" />
+        <van-icon name="my-xiexin" color="#fff" style="line-height:12px;font-size:12px" />
         <div style="line-height:12px;font-size:12px">写作</div>
       </div>
     </van-nav-bar>
@@ -13,14 +13,14 @@
         </div>
         <div class="bottom">
           <div class="detail">
-            <div class="data">{{'收藏量：'+item.likedata}}</div>
+            <div class="data">{{'点赞量：'+item.likedata}}</div>
             <div class="data">{{'阅读量：'+item.readdata}}</div>
           </div>
         </div>
         <template #right-icon>
           <div class="btn" @click="edit(item)">
           开始创作
-          <van-icon color="#1989fa" name="arrow" @click="addTag()"/>
+          <van-icon color="#5a62a1" name="arrow" @click="addTag()"/>
           </div>
         </template>
       </van-cell>
@@ -59,10 +59,10 @@ export default {
       });
     },
     edit(item){
-      this.$router.push({ path: "/edit" ,query:{info:item,isBook:true}});
+      this.$router.push({ path: "/edit" ,query:{info:item,isBook:'true'}});
     },
     goNewnovel() {
-      this.$router.push({ path: "/edit",query:{isBook:false} });
+      this.$router.push({ path: "/edit",query:{isBook:'false'} });
     }
   }
 };
@@ -72,14 +72,19 @@ export default {
 <style lang="less" scoped>
 .works {
   .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
     .right_shot {
       line-height: 30px;
       margin: 8px 0;
-      color: #1989fa;
+      color: #fff;
       cursor: pointer;
-    }
-    .van-icon {
-      color: #333;
     }
   }
   .novelLine {
@@ -113,7 +118,7 @@ export default {
       }
     }
     .btn{
-      color: #1989fa;
+      color: #5a62a1;
       margin: auto;
       /deep/.van-icon{
         top:2px;

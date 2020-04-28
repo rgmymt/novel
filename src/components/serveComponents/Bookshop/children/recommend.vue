@@ -35,6 +35,7 @@ export default {
     // 上滑加载更多
     onLoad() {
       if (this.refreshing) {
+        this.page = 1
         this.bookList = [];
         this.refreshing = false;
       }else{
@@ -96,6 +97,7 @@ export default {
     display: flex;
     background: #FFFFFF;
     margin-top: 0.5rem;
+    border-bottom: 1px #dddddd dashed;
     .img{
       float: left;
       width: 5rem;

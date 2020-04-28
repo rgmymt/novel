@@ -14,50 +14,18 @@
 
 <script>
 export default {
+  props:['chapter'],
+  watch:{
+    chapter:{
+      handler(){
+        this.getChapterList()
+      },
+      deep:true
+    }
+  },
   data() {
     return {
-      chapterList: [
-        {
-          id: 1,
-          title: "薄荷"
-        },
-        {
-          id: 2,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        },
-        {
-          id: 3,
-          title: "薄荷"
-        }
-      ]
+      chapterList: []
     };
   },
   created(){

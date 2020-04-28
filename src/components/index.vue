@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <van-nav-bar title="云小说阅读器">
+    <van-nav-bar title="言悦文学">
       <!-- <template #right>
         <van-icon name="search" />
       </template> -->
@@ -61,9 +61,14 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-// .index{
-//     /deep/.van-nav-bar{
-//         background: none;
-//     }
-// }
+.van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
 </style>

@@ -104,9 +104,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .activitydetil {
+  .van-nav-bar {
+    width: 100%;
+    background-color: #5a62a1;
+    
+    .van-icon {
+      color: #fff;
+    }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+  }
   padding-bottom: 50px;
   .post_body {
     padding: 1rem;
+    border-bottom: 1px dashed #ddd;
     .head {
       display: flex;
       align-items: center;
@@ -154,6 +166,13 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100%;
+    .van-button--info{
+      background-color: #5a62a1;
+      border:1px solid #5a62a1;
+    }
+  .van-cell{
+    box-shadow: 0px -3px 10px #ddd;;
+  }
   }
 }
 </style>
