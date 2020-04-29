@@ -42,15 +42,15 @@ export default {
   methods: {
     ...mapActions(["setUserInfo"]),
     login() {
-      if (this.user.userName === "admin") {
-        if(this.user.passWord ==='admin'){
-          this.setUserInfo(this.user);
-          this.$router.push({ path: "/manage" })
-        }else{
-          this.$toast.fail('管理员密码错误');
-        }
-        return
-      } 
+      // if (this.user.userName === "admin") {
+      //   if(this.user.passWord ==='admin'){
+      //     this.setUserInfo(this.user);
+      //     this.$router.push({ path: "/manage" })
+      //   }else{
+      //     this.$toast.fail('管理员密码错误');
+      //   }
+      //   return
+      // } 
       if (this.user.userName != "" && this.user.passWord != "") {
         const formData = new FormData();
         formData.append("username", this.user["userName"]);
@@ -82,7 +82,11 @@ export default {
         this.user.iswriter = res.iswriter;
         this.user.userid = res.userid;
         this.setUserInfo(this.user);
-        this.$router.push({ path: "/index" });
+        if (this.user.userName === "admin") {
+          this.$router.push({ path: "/manage" })
+        } else{
+          this.$router.push({ path: "/index" });
+        }
       });
     },
     toRegister() {
