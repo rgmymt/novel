@@ -78,6 +78,8 @@ export default {
         background-color: #FFFFFF;
         min-height: 6rem;
         padding: 0.3rem;
+        white-space: pre-wrap;
+  word-wrap: break-word;
       }
     }
   }

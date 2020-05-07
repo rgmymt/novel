@@ -12,7 +12,13 @@
               <span>标签：</span>
               <van-tag plain type="primary">{{item.typename}}</van-tag>
             </div> -->
+            <div class="detail">
+                <div class="time">{{'作者：'+item.writername }}</div>
+                <div class="poster">{{'阅读量：'+item.readdata }}</div>
+                <div class="poster">{{'点赞量：'+item.likedata}}</div>
+            </div>
           </div>
+          
         </div>
       </van-list>
     </van-pull-refresh>
@@ -93,7 +99,7 @@ export default {
 <style lang="less" scoped>
 .recommend{
   .bookLine{
-    padding: .3rem;
+    padding: .3rem 1.5rem;
     display: flex;
     background: #FFFFFF;
     margin-top: 0.5rem;
@@ -124,6 +130,23 @@ export default {
         color: #969799;
         padding: .3rem 0;
       }
+      .detail {
+            display: flex;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 12px;
+            margin: 0px;
+            margin-bottom: 5px;
+            display: flex;
+            margin-bottom: 4px;
+            margin-top: 13px;
+            .poster {
+              border-left: 1px #999999 solid;
+              margin-left: 5px;
+              padding-left: 5px;
+            }
+          }
     }
   }
 }

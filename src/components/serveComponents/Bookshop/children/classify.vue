@@ -19,10 +19,14 @@
             <img :src="item.imgUrl" style="width:100%;height:100%" />
           </div> -->
           <div class="text">
-            <div class="title">{{item.novelname}}</div>
-            <div class="tag">
-              <span>标签：</span>
-              <van-tag plain type="primary">{{item.typename}}</van-tag>
+            <div class="title">
+              {{item.novelname}}
+              <!-- <van-tag plain type="primary">{{item.typename}}</van-tag> -->
+            </div>
+            <div class="detail">
+                <div class="time">{{'作者：'+item.writername }}</div>
+                <div class="poster">{{'阅读量：'+item.readdata }}</div>
+                <div class="poster">{{'点赞量：'+item.likedata}}</div>
             </div>
           </div>
         </div>
@@ -44,6 +48,9 @@ export default {
       finished: false, // 是否到达尾端
       refreshing: false // 是否刷新
     };
+  },
+  mounted(){
+    this.gettagList();
   },
   activated() {
     this.gettagList();
@@ -136,6 +143,7 @@ export default {
   .header {
     display: flex;
     padding: 1rem;
+    padding-bottom: 0;
     font-size: 0.6rem;
     .label{
       white-space: nowrap;
@@ -154,7 +162,7 @@ export default {
     }
   }
   .bookLine {
-    padding: 0.3rem;
+    padding: 0.3rem 1.5rem;
     display: flex;
     background: #FFFFFF;
     margin-bottom: 0.5rem;
@@ -180,11 +188,23 @@ export default {
         color: #969799;
         padding: 0.3rem 0;
       }
-      .tag {
-        font-size: 0.3rem;
-        color: #969799;
-        padding: 0.3rem 0;
-      }
+      .detail {
+            display: flex;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 12px;
+            margin: 0px;
+            margin-bottom: 5px;
+            display: flex;
+            margin-bottom: 4px;
+            margin-top: 13px;
+            .poster {
+              border-left: 1px #999999 solid;
+              margin-left: 5px;
+              padding-left: 5px;
+            }
+          }
     }
   }
 }

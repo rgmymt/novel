@@ -63,6 +63,8 @@ export default {
     }
     .content{
       margin-top: 1rem;
+      white-space: pre-wrap;
+  word-wrap: break-word;
     }
   }
 }

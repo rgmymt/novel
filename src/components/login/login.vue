@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <img class="logo" src="../../assets/logo.png" />
+    <div class="title">言悦文学</div>
     <van-cell-group>
       <van-field
         v-model="user.userName"
@@ -130,7 +131,13 @@ export default {
   align-items: center;
   .logo {
     margin-top: 15%;
-    width: 50%;
+    width: 25%;
+  }
+  .title{
+    font-size: 3rem;
+    color: #5a62a1;
+    margin-top: 2rem;
+    //font-weight: bold;
   }
   .van-cell-group {
     width: 80%;

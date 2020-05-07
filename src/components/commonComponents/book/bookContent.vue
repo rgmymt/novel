@@ -13,7 +13,7 @@
           <van-icon name="arrow-left" color="#333" size="2rem" @click="$router.go(-1)"/>
         </van-col>
         <van-col span="16" >
-          <div class="van-ellipsis">{{info.chaptername}}</div>
+          <div class="van-ellipsis" style="color:#646566">{{info.chaptername}}</div>
         </van-col>
       </van-row>
       </van-popup>
@@ -24,7 +24,7 @@
         :style="{ height: '7%' }"
       >
       <van-tabbar active-color="#7d7e80">
-        <van-tabbar-item  @click="setFont = true"><img src="../../../assets/fontSize.png" style="width:18px"><br/>字体</van-tabbar-item>
+        <van-tabbar-item  @click="setFont = true" style="color:#646566"><img src="../../../assets/fontSize.png" style="width:18px"><br/>字体</van-tabbar-item>
         <van-tabbar-item icon="bars" @click="showCatalog">目录</van-tabbar-item>
         <van-tabbar-item icon="description" @click="toBookDetil">文章详情</van-tabbar-item>
         <van-tabbar-item icon="home-o" @click="toHome">首页</van-tabbar-item>
@@ -90,7 +90,7 @@ export default {
           chapterId:this.info.chapterid
         }
       }).then(res => {
-        //this.chapterList = res 
+        console.log(res)
       })
     },
     change(info){
@@ -123,13 +123,15 @@ export default {
 <style lang="less" scoped>
 .bookcontent{
   padding: 1rem;
-  height: 100vh;
-  background-color: rgba(215, 232, 212, 0.5);
+  min-height: 100vh;
+  background-color: rgba(215, 232, 212,1);
   font-size: 17px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   .moreInfo{
     /deep/.van-popup{
-    background-color: rgba(150, 151, 153, 0.5);
-    opacity: 0.8;
+    background-color: rgba(150, 151, 153, 1);
+   // opacity: 0.8;
       .van-ellipsis{
         line-height: 2rem;
         color: #7d7e80;
